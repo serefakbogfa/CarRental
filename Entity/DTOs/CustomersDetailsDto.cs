@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entity.DTOs
 {
-    public class CustomersDetails :IDto
+    public class CustomersDetailsDto :IDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
