@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Core.DataAccess.Entities.Concrete;
+using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Constans
@@ -50,5 +52,15 @@ namespace Business.Constans
 
 
         public static string MaintenanceTime = "Sistem Bakımda";
+
+        public static string ColorAdded { get; internal set; }
+        public static string ColorDeleted { get; internal set; }
+        public static SerializationInfo AuthorizationDenied { get; internal set; }
+        public static string AccessTokenCreated { get; internal set; }
+        public static string UserAlreadyExists { get; internal set; }
+        public static string SuccessfulLogin { get; internal set; }
+        public static User PasswordError { get; internal set; }
+        public static User UserNotFound { get; internal set; }
+        public static string UserForRegistered { get; internal set; }
     }
 }

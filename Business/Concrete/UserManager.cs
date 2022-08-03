@@ -1,5 +1,9 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspect.Autofac.Validation;
+using Core.DataAccess.Entities.Concrete;
 using Core.DataAccess.Utilities.Results.Abstracts;
+using DataAccess.Abstract;
 using Entity.Concrete;
 using System;
 using System.Collections.Generic;
@@ -9,29 +13,26 @@ namespace Business.Concrete
 {
     public class UserManager : IUserService
     {
-        public IResult Add(User user)
+        IUserDal _userDal;
+
+        public UserManager(IUserDal userDal)
         {
-            throw new NotImplementedException();
+            _userDal = userDal;
         }
 
-        public IResult Delete(User user)
+        public List<OperationClaims> GetClaims(User user)
         {
-            throw new NotImplementedException();
+            return _userDal.GetClaims(user);
         }
 
-        public IDataResult<List<User>> GetAll()
+        public void Add(User user)
         {
-            throw new NotImplementedException();
+            _userDal.Add(user);
         }
 
-        public IDataResult<User> GetById(int id)
+        public User GetByMail(string email)
         {
-            throw new NotImplementedException();
-        }
-
-        public IResult Update(User user)
-        {
-            throw new NotImplementedException();
+            return _userDal.Get(u => u.Email == email);
         }
     }
 }

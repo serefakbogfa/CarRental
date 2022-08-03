@@ -3,9 +3,8 @@ using DataAccess.Abstract;
 using DataAccess.Conrete.EntityFramework;
 using Entity.Concrete;
 using Entity.DTOs;
-using System;
 using System.Collections.Generic;
-using System.Text;
+
 
 namespace DataAccess.Conrete
 {
@@ -19,7 +18,7 @@ namespace DataAccess.Conrete
 
             using (ReCapContext context = new ReCapContext())
             {
-                var result = from c in context.Cars
+                var result = from c in context.Car
                              join b in context.Brands
                              on c.BrandId equals b.BrandId
                              join co in context.Colors

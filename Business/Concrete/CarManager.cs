@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constans;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspect.Autofac.Validation;
 using Core.DataAccess.Utilities.Results.Abstracts;
 using Core.DataAccess.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -19,7 +21,7 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
             if (car.DailyPrice > 0 && car.Description.Length > 2)
@@ -34,13 +36,13 @@ namespace Business.Concrete
 
             }
         }
-
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Delete(Car car)
         {
            _carDal.Delete(car);
             return new SuccessResult(Messages.carDeletedMessage);
         }
-
+        [ValidationAspect(typeof(CarValidator))]
         public IDataResult<List<Car>> GetAll()
         {
             if (DateTime.Now.Hour ==17)
@@ -50,17 +52,17 @@ namespace Business.Concrete
             }
             return new ErrorDataResult<List<Car>>(_carDal.GetAll(), Messages.carListed);
         }
-
+        [ValidationAspect(typeof(CarValidator))]
         public IDataResult<List<CarDetailsDto>> GetCarDetails()
         {
             return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails(), Messages.carDetailsListed);
         }
-
+        [ValidationAspect(typeof(CarValidator))]
         public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == brandId), Messages.carListedByBrandId);
         }
-
+        [ValidationAspect(typeof(CarValidator))]
         public IDataResult<List<Car>> GetCarsByColorId(int colorId)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.ColorId == colorId), Messages.carListedByColorId);
